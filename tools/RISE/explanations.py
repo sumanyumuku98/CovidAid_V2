@@ -50,7 +50,7 @@ class RISE(nn.Module):
         p = []
         for i in range(0, N, self.gpu_batch):
 #             print("Forward check for mask number ",i)
-            p.append(self.model(torch.autograd.Variable(stack[i:min(i + self.gpu_batch, N)])))
+            p.append(self.model(torch.autograd.Variable(stack[i:min(i + self.gpu_batch, N)]))[0])
         p = torch.cat(p)
         # Number of classes
         CL = p.size(1)
@@ -72,7 +72,7 @@ class RISEBatch(RISE):
         #p = nn.Softmax(dim=1)(model(stack)) in batches
         p = []
         for i in range(0, N*B, self.gpu_batch):
-            p.append(self.model(stack[i:min(i + self.gpu_batch, N*B)]))
+            p.append(self.model(stack[i:min(i + self.gpu_batch, N*B)])[0])
         p = torch.cat(p)
         CL = p.size(1)
         p = p.view(N, B, CL)

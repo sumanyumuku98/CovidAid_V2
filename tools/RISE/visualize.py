@@ -11,11 +11,25 @@ import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
+from PIL import Image
+import cv2
+import glob
 
 from RISE.utils import *
 from RISE.explanations import RISE
 
 cudnn.benchmark = True
+
+# mapsPaths = glob.glob("/home/cse/staff/muku95.cstaff/scratch/BSTI_Attention/*")
+
+def reverse(inp):
+    inp = inp.numpy().transpose((1, 2, 0))
+    # Mean and std for ImageNet
+    mean = np.array([0.485, 0.456, 0.406])
+    std = np.array([0.229, 0.224, 0.225])
+    inp = std * inp + mean
+    inp = np.clip(inp, 0, 1)
+    return inp
 
 def visualize(model,img_dir,visualize_dir,CovidDataLoader):
     
@@ -44,7 +58,7 @@ def visualize(model,img_dir,visualize_dir,CovidDataLoader):
         # Get all predicted labels first
         target = np.empty(len(data_loader), np.int)
         for i, (img, _) in enumerate(tqdm(data_loader, total=len(data_loader), desc='Predicting labels')):
-            p, c = torch.max(model(torch.autograd.Variable(img.cuda())), dim=1)
+            p, c = torch.max(model(torch.autograd.Variable(img.cuda()))[0], dim=1)
             target[i] = c[0]
 
         # Get saliency maps for all images in val loader
@@ -55,15 +69,26 @@ def visualize(model,img_dir,visualize_dir,CovidDataLoader):
         return explanations
 
     explanations = explain_all(data_loader, explainer)
-    
+    cm = plt.get_cmap("jet")
     if not os.path.exists(visualize_dir):
         os.makedirs(visualize_dir)
-    for i, (img, img_name) in enumerate(tqdm(data_loader, total=len(data_loader), desc='Generating visualizations')):
-        img_name = os.path.splitext(img_name[0])[0]
-        p, c = torch.max(model(torch.autograd.Variable(img.cuda())), dim=1)
+    for i, (img, imgName) in enumerate(tqdm(data_loader, total=len(data_loader), desc='Generating visualizations')):
+        img_name = os.path.splitext(imgName[0])[0]
+        p, c = torch.max(model(torch.autograd.Variable(img.cuda()))[0], dim=1)
         p, c = p.data[0], c.data[0]
-
-        plt.figure(figsize=(10, 5))
+        
+        ######
+#         index=0
+#         for index,fpath in enumerate(mapsPaths):
+#             aName = mapsPaths[index].split("/")[-1][:-4]
+#             if "vis_"+img_name==aName:
+#                 break
+#         imageAt = Image.open(mapsPaths[index]).convert('RGB')
+#         imgPre = preprocess(imageAt)
+        
+        ######
+        
+        plt.figure(figsize=(16, 10))
         plt.subplot(121)
         plt.axis('off')
         tensor_imshow(img[0])
@@ -71,5 +96,21 @@ def visualize(model,img_dir,visualize_dir,CovidDataLoader):
         plt.axis('off')
         tensor_imshow(img[0])
         sal = explanations[i]
+        
+#         print(sal)
+        
+        ## Heat map for cv2 image
+#         sal2 = (sal*256).astype(np.uint8)
+#         heatmap =cv2.applyColorMap(sal2, cv2.COLORMAP_JET)
+#         imgVal = reverse(img[0])
+#         rescaled= np.uint8(imgVal*256)
+
+#         fin = cv2.addWeighted(heatmap, 0.75, rescaled, 0.25, 0)
+#         img_pil = Image.fromarray(fin).convert('RGB')
+#         img_pil = img_pil.resize((480,480))
+#         img_pil.save(visualize_dir+"/"+imgName[0])
+
+
+        #########################
         plt.imshow(sal, cmap='jet', alpha=0.25)
         plt.savefig(visualize_dir+"/"+img_name+"_visualization.png")

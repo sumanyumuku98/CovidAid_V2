@@ -9,13 +9,15 @@ import numpy as np
 import pandas as pd
 from collections import Counter 
 import argparse
+import glob
 np.random.seed(0)
 
 
 # Dataset path
-COVID_DATA_PATH='/home/cse/dual/cs5150296/scratch/COVID_Data/covid-chestxray-dataset'
-BSTI_DATA_PATH='/home/cse/dual/cs5150296/scratch/COVID_Data/BSTI'
-KGP_DATA_PATH='/home/cse/dual/cs5150296/scratch/COVID_Data/IITKGP-Action/images/'
+COVID_DATA_PATH='./covid-chestxray-dataset'
+BSTI_DATA_PATH='./BSTI'
+KGP_DATA_PATH='./IITKGP-Action/images/'
+BMCV_DATA_PATH='./BIMCV-COVID19/'
 METADATA_CSV = os.path.join(COVID_DATA_PATH, 'metadata.csv')
 TRAIN_FILE = './data/covid19/train_list.txt'
 VAL_FILE = './data/covid19/val_list.txt'
@@ -26,11 +28,16 @@ BSTI_TEST_FILE = './data/covid19/bsti_test_list.txt'
 KGP_TRAIN_FILE = './data/covid19/kgp_train_list.txt'
 KGP_VAL_FILE = './data/covid19/kgp_val_list.txt'
 KGP_TEST_FILE = './data/covid19/kgp_test_list.txt'
+BMCV_TRAIN_FILE='./data/covid19/bmcv_train_list.txt'
+BMCV_VAL_FILE='./data/covid19/bmcv_val_list.txt'
+BMCV_TEST_FILE='./data/covid19/bmcv_test_list.txt'
 REMOVED_LIST = './data/covid19/removed_files.txt'
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--bsti", action='store_true', default=False)
 parser.add_argument("--kgp_action", action='store_true', default=False)
+parser.add_argument("--bmcv", action='store_true', default=False)
+
 args = parser.parse_args()
 
 # Load patient stats
@@ -53,10 +60,10 @@ val_patients = set({73, 51, 48, 11, 43, 24, 112, 181})
 
 removed_files = set()
 
-with open(REMOVED_LIST, 'r') as removed_list:
-        for filename in removed_list:
-            filename = filename.rstrip()
-            removed_files.add(filename)
+# with open(REMOVED_LIST, 'r') as removed_list:
+#         for filename in removed_list:
+#             filename = filename.rstrip()
+#             removed_files.add(filename)
 
 #Initial values for covid-chestxray-dataset prior to removal
 print ('#Train patients:', len(set(covids.keys()).difference(test_patients.union(val_patients))))
@@ -111,9 +118,9 @@ if args.bsti :
     bsti_images = [f for f in os.listdir(BSTI_DATA_PATH) if os.path.isfile(os.path.join(BSTI_DATA_PATH, f))]
     for imgfile in bsti_images:
         rand_val = np.random.rand(1)
-        if rand_val < 0.1:
+        if rand_val < 0.05:
             bsti_val_list.append(imgfile)
-        elif rand_val < 0.3:
+        elif rand_val < 0.15:
             bsti_test_list.append(imgfile)
         else:
             bsti_train_list.append(imgfile)
@@ -138,9 +145,9 @@ if args.kgp_action :
      
         for imgfile in kgp_images:
             rand_val = np.random.rand(1)
-            if rand_val < 0.1:
+            if rand_val < 0.05:
                 kgp_val_list.append(subdir+"/"+imgfile)
-            elif rand_val < 0.3:
+            elif rand_val < 0.15:
                 kgp_test_list.append(subdir+"/"+imgfile)
             else:
                 kgp_train_list.append(subdir+"/"+imgfile)
@@ -150,3 +157,40 @@ if args.kgp_action :
     make_img_list(KGP_TRAIN_FILE, kgp_train_list, KGP_DATA_PATH)
     make_img_list(KGP_VAL_FILE, kgp_val_list, KGP_DATA_PATH)
     make_img_list(KGP_TEST_FILE, kgp_test_list, KGP_DATA_PATH)
+    
+# Include BMCV Dataset
+if args.bmcv:
+    
+    bmcv_train_list=[]
+    bmcv_test_list=[]
+    bmcv_val_list=[]
+    
+    bmcvList=[]
+    for filename in glob.glob(BMCV_DATA_PATH+'**/*.png',recursive=True):
+        if filename.startswith(BMCV_DATA_PATH):
+            bmcvList.append(filename[len(BMCV_DATA_PATH):])
+            
+    for imgfile in bmcvList:
+        rand_val = np.random.rand(1)
+        if rand_val<0.05:
+            bmcv_val_list.append(imgfile)
+        elif rand_val<0.15:
+            bmcv_test_list.append(imgfile)
+        else:
+            bmcv_train_list.append(imgfile)
+            
+    
+    print("BIMCV COVID-19 train-test-val split: ",len(bmcv_train_list), len(bmcv_test_list), len(bmcv_val_list))
+       
+    make_img_list(BMCV_TRAIN_FILE, bmcv_train_list, BMCV_DATA_PATH)
+    make_img_list(BMCV_VAL_FILE, bmcv_val_list, BMCV_DATA_PATH)
+    make_img_list(BMCV_TEST_FILE, bmcv_test_list, BMCV_DATA_PATH)
+
+        
+print("Total Public Covid Train Images:{}".format(len(train_list)+len(bsti_train_list)+len(bmcv_train_list)+len(kgp_train_list)))
+print("Total Public Covid Val Images:{}".format(len(val_list)+len(bsti_val_list)+len(bmcv_val_list)+len(kgp_val_list)))
+print("Total Public Covid Test Images:{}".format(len(test_list)+len(bsti_test_list)+len(bmcv_test_list)+len(kgp_test_list)))
+
+
+
+    

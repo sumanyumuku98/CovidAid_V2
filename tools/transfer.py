@@ -3,7 +3,9 @@ Code to transfer weights from CheXNet (torch 0.3) to CovidAID
 """
 
 import sys
-from covidaid import CovidAID, CheXNet
+# from covidaid_v2 import CovidAID, CheXNet
+from model_AGCNN import CovidAidAttend, CheXNet
+
 import torch
 import argparse
 
@@ -16,10 +18,11 @@ args = parser.parse_args()
 chexnet_model_checkpoint = args.chexnet_model_checkpoint
 covidaid_model_trained_checkpoint = args.covidaid_model_trained_checkpoint
 
-model = CovidAID(combine_pneumonia=args.combine_pneumonia)
+model = CovidAidAttend(combine_pneumonia=args.combine_pneumonia)
+# model = Discriminator()
 
 def load_weights(checkpoint_pth, state_dict=True):
-    model = torch.load(checkpoint_pth)
+    model = torch.load(checkpoint_pth,map_location='cpu')
     
     if state_dict:
         return model['state_dict']
@@ -43,7 +46,7 @@ c_keys = {k for k in chexnet_model.keys()}
 t_keys = {'module.' + k for k in template.keys()}
 
 assert len(c_keys.difference(t_keys)) == 0
-assert len(t_keys.difference(c_keys)) == 0
+# assert len(t_keys.difference(c_keys)) == 0
 
 
 # Transfer the feature weights
