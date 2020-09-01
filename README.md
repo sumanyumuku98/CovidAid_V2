@@ -67,7 +67,7 @@ python tools/inference.py --combine_pneumonia --checkpoint <Path_To_Best_Global_
 ```
 In order to get Attention maps and class probabilities:
 ```
-python tools/train_AGCNN.py --mode visualize --combine_pneumonia --img_dir <Path_To_Dir> --visualize_dir <Path_To_Out_Dir> --ckpt_G <Best_Global_Model_Path> --ckpt_L <Best_Local_Model_path> --ckpt_F <Best_Fusion_Model_Path>
+python tools/train_AGCNN.py --mode visualize --combine_pneumonia --img_dir testsample --visualize_dir testresults --ckpt_G models/Gloval_Best.pth --ckpt_L models/Local_Best.pth --ckpt_F models/Fusion_Best.pth
 ```
 
 
