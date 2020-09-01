@@ -90,3 +90,9 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
+## TODO
+- Dataset Description and emphasis on using 3-class
+- Getting Started
+- Results Section
+- Visualization Sections
+
