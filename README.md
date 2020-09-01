@@ -1,36 +1,12 @@
 # CovidAID for Detection of SARS-CoV-2 from CXR using Attention Guided CNN.
 
-We present `CovidAID` (Covid AI Detector), a PyTorch (python3) based implementation, to identify COVID-19 cases from X-Ray images. The model takes as input a chest X-Ray image and outputs the probability scores for 4 classes (`NORMAL`, `Bacterial Pneumonia`, `Viral Pneumonia` and `COVID-19`).
+This is an extention of work done by [arpanmangal](https://github.com/arpanmangal/CovidAID). The model takes a CXR as an input and outputs the probability scores for 3 classes (`NORMAL`, `Pneumonia` and `COVID-19`) or 4 classes (`Normal`, `Bacterial Pneumonia`, `Viral Pneumonia`, `Covid-19`)
 
-It is based on [CheXNet](https://stanfordmlgroup.github.io/projects/chexnet/) (and it's reimplementation by [arnoweng](https://github.com/arnoweng/CheXNet)).
-
-
-## Installation
-Please refer to [INSTALL.md](./INSTALL.md) for installation.
+It is based on [Diagnose like a Radiologist: Attention Guided Convolutional Neural Network for Thorax Disease Classification](https://arxiv.org/abs/1801.09927) and its reimplementation by [Ien001](https://github.com/Ien001/AG-CNN). The initial weights used for training were obtained from [arnoweng](https://github.com/arnoweng/CheXNet).
 
 ## Dataset
-`CovidAID` uses the [covid-chestxray-dataset](https://github.com/ieee8023/covid-chestxray-dataset) and [BSTI-dataset](https://www.bsti.org.uk/training-and-education/covid-19-bsti-imaging-database/)for COVID-19 X-Ray images and [chest-xray-pneumonia](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia) dataset for data on Pneumonia and Normal lung X-Ray images. 
+`CovidAID` uses the [covid-chestxray-dataset](https://github.com/ieee8023/covid-chestxray-dataset), [BSTI-dataset](https://www.bsti.org.uk/training-and-education/covid-19-bsti-imaging-database/)for COVID-19 X-Ray images and [chest-xray-pneumonia](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia) dataset for data on Pneumonia and Normal lung X-Ray images. 
 
-It was observed that the crowdsourced [covid-chestxray-dataset](https://github.com/ieee8023/covid-chestxray-dataset) had mulitple X-rays of COVID-19 patients which had no visual indication of COVID-19 and appeared Normal. Our Radiologist cross-checked the dataset to remove some of these images. The list of these images can be found in data/covid19/removed_files.txt
-
-### Data Distribution
-Chest X-Ray image distribution
-|  Type | Normal | Bacterial Pneumonia | Viral Pneumonia | COVID-19 | Total |
-|:-----:|:------:|:---------:|:--------:|:--------:|:-----:|
-| Train |  1341  |    2530 |  1337  |   115   | 5323 |
-| Val   | 8 | 8 | 8 | 10 | 34
-|  Test |   234 | 242 | 148  |  30   |   654 |
-
-Chest X-Ray patient distribution
-|  Type | Normal | Bacterial Pneumonia | Viral Pneumonia | COVID-19 | Total |
-|:-----:|:------:|:---------:|:--------:|:--------:|:-----:|
-| Train |  1000  |   1353 | 1083   |   80   | 3516 |
-| Val   | 8 | 7 | 7 | 7 | 29
-|  Test |   202 | 77 | 126  |  19   |   424 |
-
-
-## Get started
-Please refer our paper [paper](http://arxiv.org/abs/2004.09803) for description of architecture and method. Refer to [GETTING_STARTED.md](./GETTING_STARTED.md) for detailed examples and abstract usage for training the models and running inference.
 
 ## Results
 
