@@ -8,13 +8,16 @@ It is based on [Diagnose like a Radiologist: Attention Guided Convolutional Neur
 `CovidAID` uses the [covid-chestxray-dataset](https://github.com/ieee8023/covid-chestxray-dataset), [BSTI-dataset](https://www.bsti.org.uk/training-and-education/covid-19-bsti-imaging-database/)for COVID-19 X-Ray images and [chest-xray-pneumonia](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia) dataset for data on Pneumonia and Normal lung X-Ray images. 
 
 
+## Getting Started
+
+
 ## Results
 
 We present the results in terms of both the per-class AUROC (Area under ROC curve) on the lines of `CheXNet`, as well as confusion matrix formed by treating the most confident class prediction as the final prediction. We obtain a mean AUROC of `0.9738` (4-class configuration).
 
 <center>
 <table>
-<tr><th></th><th>3-Class Classification</th><th>4-Class Classification</th></tr>
+<tr><th></th><th>3-Class Classification</th></tr>
 <tr>
 <td></td>
 <td>
@@ -25,25 +28,12 @@ We present the results in terms of both the per-class AUROC (Area under ROC curv
 | Bacterial Pneumonia | 0.9814 | 0.995 | 0.868
 | COVID-19 | 0.9997 | 1.000 | 0.968
 
-</td><td>
-
-| Pathology  |   AUROC    | Sensitivity | PPV
-| :--------: | :--------: | :--------: | :--------: |
-| Normal Lung  | 0.9788 | 0.761 | 0.989
-| Bacterial Pneumonia | 0.9798 | 0.961 | 0.881
-| Viral Pneumonia | 0.9370 | 0.872 | 0.721
-| COVID-19 | 0.9994 | 1.000 | 0.938
-
 </td></tr> 
 <tr>
 <td>ROC curve</td>
 <td>
 
 ![ROC curve](./assets/roc_3.png "ROC curve")
-
-</td><td>
-
-![ROC curve](./assets/roc_4.png "ROC curve")
 
 </td>
 </tr>
@@ -52,10 +42,6 @@ We present the results in terms of both the per-class AUROC (Area under ROC curv
 <td>
 
 ![Normalized Confusion Matrix](./assets/cm_3.png "Normalized Confusion Matrix")
-
-</td><td>
-
-![Confusion Matrix](./assets/cm_4.png "Confusion Matrix")
 
 </td>
 </tr>
@@ -104,28 +90,3 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
-## Contributions
-
-This work was collaboratively conducted by Arpan Mangal, Surya Kalia, Harish Rajgopal, Krithika Rangarajan, Vinay Namboodiri, Subhashis Banerjee and Chetan Arora.
-
-### Citation
-```
-@article{covidaid,
-    title={CovidAID: COVID-19 Detection Using ChestX-Ray},
-    author={Arpan Mangal and Surya Kalia and Harish Rajgopal and Krithika Rangarajan and Vinay Namboodiri and Subhashis Banerjee and Chetan Arora},
-    year={2020},
-    journal={arXiv 2004.09803},
-    url={https://github.com/arpanmangal/CovidAID}
-}
-```
-
-## Contact
-If you have any question, please file an issue or contact the author:
-```
-Arpan Mangal: mangalarpan@gmail.com
-Surya Kalia: suryackalia@gmail.com
-```
-
-## TODO
-- Add support for `torch>=1.0`
-- Support for multi-GPU training
