@@ -26,15 +26,51 @@ cd models
 bash weights.sh
 ```
 ### Data Preparation
+Remove the `--combine_pneumonia` flag in below cases for 4-class classification.
 1. Prepare Covid-19 Dataset:
   ```
-  python data_tools 
+  python data_tools/prepare_covid_data.py --bsti --kgp_action --bmcv
   ```
+  * Make sure that the name of folders is similar to that mentioned in `prepare_covid_data.py` for the above mentioned datasets.
 2. Combine all Data:
   ```
-  
+  python data_tools/prepare_data.py --combine_pneumonia --bsti --kgp_action --bmcv
   ```
-  
+  * Labels Assigned to respective categories:
+    * Class 0: Normal
+    * Class 1: Pneumonia
+    * Class 2: Covid-19
+    
+### Transfer CheXNet Weights
+This script is used to transfer the `CheXNet` weights from [here](https://github.com/arnoweng/CheXNet) to our model and replace the final layer with 3 or 4 classes respectively. By default, the transferred weights have been provided in `data/` folder and you won't need to run this. But in case you want to initialize the model with different number of classes then you can run this.
+```
+python tools/transfer.py --combine_pneumonia
+```
+### Training
+By default the weights are saved in `models/` folder but it is advised to specify some other directory for saving the weights.
+```
+python tools/train_AGCNN.py --mode train --ckpt_init data/CovidXNet_transfered_3.pth.tar --combine_pneumonia --epochs 100 --bs 16 --save <path_to_save_dir>
+```
+In order to resume training:
+```
+python tools/train_AGCNN.py --mode train --resume --ckpt_G <Path_To_Global_Model> --ckpt_L <Path_To_Local_Model> --ckpt_F <Path_To_Fusion_Model> --save <Path_To_Save_Dir> --combine_pneumonia
+```
+### Evaluation
+Binary evaulation can be done i.e `Non-Covid` V/s `Covid` by setting `binary_eval=True` in `test` function in `tools/train_AGCNN.py`. By default, it will compute metrics for classes based on `--combine_pneumonia` flag.
+```
+python tools/train_AGCNN.py --mode test --combine_pneumonia --ckpt_G <Path_To_Best_Global_Model> --ckpt_L <Path_To_Best_Local_Model> --ckpt_F <Path_To_Best_Fusion_Model> --bs 16 --cm_path plots/cm_best --roc_path plots/roc_best
+```
+### Visualization and Inference
+In order to get RISE visualizations and class probabilities on a set of images:
+```
+python tools/inference.py --combine_pneumonia --checkpoint <Path_To_Best_Global_Model> --img_dir <Path_To_Images> --visualize_dir <Path_To_Out_Dir>
+```
+In order to get Attention maps and class probabilities:
+```
+python tools/train_AGCNN.py --mode visualize --combine_pneumonia --img_dir <Path_To_Dir> --visualize_dir <Path_To_Out_Dir> --ckpt_G <Best_Global_Model_Path> --ckpt_L <Best_Local_Model_path> --ckpt_F <Best_Fusion_Model_Path>
+```
+
+
 ## Results
 
 We present the results in terms of both the per-class AUROC (Area under ROC curve) on the lines of `CheXNet`, as well as confusion matrix formed by treating the most confident class prediction as the final prediction. We obtain a mean AUROC of `0.9738` (4-class configuration).
@@ -114,9 +150,4 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
-## TODO
-- Dataset Description and emphasis on using 3-class
-- Getting Started
-- Results Section
-- Visualization Sections
 
