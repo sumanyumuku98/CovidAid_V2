@@ -150,4 +150,8 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
+## TODO
+* Update Result Section
+* Update Visualization  Section. Add Images of Attention Maps
+
 
