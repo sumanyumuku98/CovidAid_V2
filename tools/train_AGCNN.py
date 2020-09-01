@@ -1198,7 +1198,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=['train', 'test','visualize'], required=True)
     parser.add_argument("--combine_pneumonia", action='store_true', default=False)
-    parser.add_argument("--save", type=str)
+    parser.add_argument("--save", type=str, default='models/')
     parser.add_argument("--bs", type=int, default=8)
     parser.add_argument("--epochs", type=int,default=50)
     parser.add_argument("--resume",action='store_true',default=False)
