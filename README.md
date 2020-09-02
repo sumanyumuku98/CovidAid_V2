@@ -22,11 +22,6 @@ Create venv:
 conda env create -f env.yml
 conda (or source) activate covid
 ```
-Install trained weights for inference:
-```
-cd models
-bash weights.sh
-```
 ### Data Preparation
 Remove the `--combine_pneumonia` flag in below cases for 4-class classification.
 1. Prepare Covid-19 Dataset:
