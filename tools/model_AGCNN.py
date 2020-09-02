@@ -5,6 +5,8 @@ import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 from collections import OrderedDict
 
+USE_GPU=torch.cuda.is_available()
+
 __all__ = ['DenseNet', 'Densenet121_AG']
 
 model_urls = {
@@ -161,7 +163,11 @@ class Fusion_Branch(nn.Module):
         #fusion = torch.cat((global_pool.unsqueeze(2), local_pool.unsqueeze(2)), 2).cuda()
         # fusion = fusion.max(2)[0]#.squeeze(2).cuda()
         # print(fusion.shape)
-        fusion = torch.cat((global_pool, local_pool), 1).cuda()
+        if USE_GPU:
+            fusion = torch.cat((global_pool, local_pool), 1).cuda()
+        else:
+            fusion = torch.cat((global_pool, local_pool), 1)
+
         fusion_var = torch.autograd.Variable(fusion)
         x = self.fc(fusion_var)
         x = self.Sigmoid(x)
