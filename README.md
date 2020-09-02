@@ -1,8 +1,10 @@
 # CovidAID for Detection of SARS-CoV-2 from CXR using Attention Guided CNN.
 
-This is an extention of work done by [arpanmangal](https://github.com/arpanmangal/CovidAID). The model takes a CXR as an input and outputs the probability scores for 3 classes (`NORMAL`, `Pneumonia` and `COVID-19`) or 4 classes (`Normal`, `Bacterial Pneumonia`, `Viral Pneumonia`, `Covid-19`)
+Chest Radiography (CXR) is among the most common investigations performed world-over and accounts for 25% of total diagnostic imaging procedures. It is a portable, inexpensive, and a safe modality, which is widely used to assess the extent of lung involvement in a wide variety of thoracic pathologies. It is widely available in hospital set-ups even in small peripheral centres and involves minimal contact with the patient. However, CXR has not been seen to be sensitive or specific for changes of COVID-19. While many patients do not show any changes on chest radiography (to an expert eye), those who do show changes are difficult to differentiate from other forms of pneumonia.
 
-It is based on [Diagnose like a Radiologist: Attention Guided Convolutional Neural Network for Thorax Disease Classification](https://arxiv.org/abs/1801.09927) and its reimplementation by [Ien001](https://github.com/Ien001/AG-CNN). The initial weights used for training were obtained from [arnoweng](https://github.com/arnoweng/CheXNet).
+
+
+It is based on [Diagnose like a Radiologist: Attention Guided Convolutional Neural Network for Thorax Disease Classification](https://arxiv.org/abs/1801.09927) and its reimplementation by [Ien001](https://github.com/Ien001/AG-CNN). The initial weights used for training were obtained from [CheXNet](https://github.com/arnoweng/CheXNet).
 
 ## Dataset
 `CovidAID` uses the [covid-chestxray-dataset](https://github.com/ieee8023/covid-chestxray-dataset), [BSTI-dataset](https://www.bsti.org.uk/training-and-education/covid-19-bsti-imaging-database/), [BIMCV](https://bimcv.cipf.es/bimcv-projects/bimcv-covid19/#1590858128006-9e640421-6711), [IIT-KGP](https://ieee-dataport.org/open-access/covid19action-radiology-cxr) for COVID-19 X-Ray images and [chest-xray-pneumonia](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia), [RSNA](https://www.kaggle.com/c/rsna-pneumonia-detection-challenge) dataset for data on Pneumonia and Normal lung X-Ray images. 
