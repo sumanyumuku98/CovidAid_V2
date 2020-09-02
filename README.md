@@ -70,7 +70,7 @@ python tools/train_AGCNN.py --mode visualize --combine_pneumonia --img_dir tests
 
 ## Results
 
-We present the results in terms of both the per-class AUROC (Area under ROC curve) on the lines of `CheXNet`, as well as confusion matrix formed by treating the most confident class prediction as the final prediction. We obtain a mean AUROC of `0.9738` (4-class configuration).
+We obtained an accuracy of around `96.46%` on the public test set. The mean AUROC for 3-Class configuration was around `0.996`. The respective confusion matrix and ROC curve has been shown below:
 
 <center>
 <table>
@@ -81,16 +81,16 @@ We present the results in terms of both the per-class AUROC (Area under ROC curv
 
 | Pathology  |   AUROC    | Sensitivity | PPV
 | :--------: | :--------: | :--------: | :--------: |
-| Normal Lung  | 0.9795 | 0.744 | 0.989
-| Bacterial Pneumonia | 0.9814 | 0.995 | 0.868
-| COVID-19 | 0.9997 | 1.000 | 0.968
+| Normal  | 0.9966 | 0.99 | 0.95
+| Pneumonia | 0.9932 | 0.96 | 0.96
+| COVID-19 | 0.9982 | 0.93 | 1.00
 
 </td></tr> 
 <tr>
 <td>ROC curve</td>
 <td>
 
-![ROC curve](./assets/roc_3.png "ROC curve")
+![ROC curve](./assets/roc_Public_fusion.png "ROC curve")
 
 </td>
 </tr>
@@ -98,7 +98,7 @@ We present the results in terms of both the per-class AUROC (Area under ROC curv
 <td>Confusion Matrix</td>
 <td>
 
-![Normalized Confusion Matrix](./assets/cm_3.png "Normalized Confusion Matrix")
+![Normalized Confusion Matrix](./assets/cm_Public_fusion.png "Normalized Confusion Matrix")
 
 </td>
 </tr>
@@ -147,8 +147,5 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
-## TODO
-* Update Result Section
-* Update Visualization  Section. Add Images of Attention Maps
 
 
