@@ -15,7 +15,7 @@ More datasets can be added as required by making changes in `data_tools/prepare_
 ### Installation
 Clone this repo:
 ```
-git clone https://github.com/aaekay/CovidAid_V2.git
+git clone https://github.com/sumanyumuku98/CovidAid_V2.git
 ```
 Create venv:
 ```
