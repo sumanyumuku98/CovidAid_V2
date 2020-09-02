@@ -66,7 +66,7 @@ In order to get Attention maps and class probabilities:
 ```
 python tools/train_AGCNN.py --mode visualize --combine_pneumonia --img_dir testsample --visualize_dir testresults --ckpt_G models/Gloval_Best.pth --ckpt_L models/Local_Best.pth --ckpt_F models/Fusion_Best.pth
 ```
-
+By default, the best weights have been provided in `models/` directory and will be used when no checkpoint paths have been provided in the inference scripts.
 
 ## Results
 
