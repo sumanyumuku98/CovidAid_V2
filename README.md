@@ -2,7 +2,7 @@
 
 Chest Radiography (CXR) is among the most common investigations performed world-over and accounts for 25% of total diagnostic imaging procedures. It is a portable, inexpensive, and a safe modality, which is widely used to assess the extent of lung involvement in a wide variety of thoracic pathologies. It is widely available in hospital set-ups even in small peripheral centres and involves minimal contact with the patient. However, CXR has not been seen to be sensitive or specific for changes of COVID-19. While many patients do not show any changes on chest radiography (to an expert eye), those who do show changes are difficult to differentiate from other forms of pneumonia.
 
-
+We introduce `CovidAID` which takes a CXR as an input and outputs either 3-Class probabilities: `Normal`, `Pneumonia` and `Covid-19` or 4-Class probabilities: `Normal`, `Bacterial Pneumonia`, `Viral Pneumnonia` and `Covid-19`. It consists of 3 models: **Global Model**: which incorporates the whole input image to make a decision, **Local Model**: which incorporates the discriminative features extracted from global model to make a decision and **Fusion Model**: which uses both global and local features obtained from above models to make a decision.
 
 It is based on [Diagnose like a Radiologist: Attention Guided Convolutional Neural Network for Thorax Disease Classification](https://arxiv.org/abs/1801.09927) and its reimplementation by [Ien001](https://github.com/Ien001/AG-CNN). The initial weights used for training were obtained from [CheXNet](https://github.com/arnoweng/CheXNet).
 
