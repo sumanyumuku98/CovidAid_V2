@@ -20,7 +20,7 @@ git clone https://github.com/sumanyumuku98/CovidAid_V2.git
 Create venv:
 ```
 conda env create -f env.yml
-conda (or source) activate covid
+conda activate covid
 ```
 ### Data Preparation
 Remove the `--combine_pneumonia` flag in below cases for 4-class classification.
@@ -109,37 +109,50 @@ We obtained an accuracy of around `96.46%` on the public test set. The mean AURO
 </center>
 
 ## Visualizations
-To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for  our model’s  predictions  using  RISE. The purpose of these visualizations was to have an additional check to rule out  model  over-fitting  as  well  as  to  validate  whether  the  regions  of  attention correspond to the right features from a radiologist’s perspective. Below are some of the saliency maps on COVID-19 positive X-rays.
-
+To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for  our model’s  predictions  using  RISE and Attention Mechanism. We have generated these in order to reason whether the model predictions make sense from a radiologist's perspective. We recommend generating attention maps instead of RISE as most the time they are consistent with RISE and take much less time and computation resource hence can be used on CPU as well. Few visualizations have been shown below:
 <center>
 
 <table>
 <tr>
 <td>
 
-![Original 1](./assets/visualizations/original_1.png "Original 1") 
+![Original 1](./assets/visualizations/orig_1.png "Original 1") 
 
 </td><td> 
 
-![Original 2](./assets/visualizations/original_2.png "Original 2") 
+![Original 2](./assets/visualizations/orig_2.png "Original 2") 
 
 </td><td> 
 
-![Original 3](./assets/visualizations/original_3.png "Original 3")
+![Original 3](./assets/visualizations/orig_3.png "Original 3")
 
 </td></tr>
 
 <tr><td> 
 
-![Visualization 1](./assets/visualizations/vis_1.png "Visualization 1") 
+![RISE 1](./assets/visualizations/rise_1.png "RISE 1") 
 
 </td><td> 
 
-![Visualization 2](./assets/visualizations/vis_2.png "Visualization 2") 
+![RISE 2](./assets/visualizations/rise_2.png "RISE 2") 
 
 </td><td>
 
-![Visualization 3](./assets/visualizations/vis_3.png "Visualization 3")
+![RISE 3](./assets/visualizations/rise_3.png "RISE 3")
+
+</td></tr>
+
+<tr><td> 
+
+![Attention 1](./assets/visualizations/attention_1.png "Attention 1") 
+
+</td><td> 
+
+![Attention 2](./assets/visualizations/attention_2.png "Attention 2") 
+
+</td><td>
+
+![Attention 3](./assets/visualizations/attention_3.png "Attention 3")
 
 </td></tr>
 </table>
