@@ -1130,7 +1130,8 @@ def visualize(img_dir= None,CKPT_PATH_G=None, CKPT_PATH_L=None,
         try :
             patchs_var, boundingList= Attention_gen_patchs(image, fm_global,'visualize')
         except ValueError:
-            continue
+            patchs_var, boundingList= Attention_gen_patchs(image, fm_global)
+
         output_local, _, pool_local = Local_Branch_model(patchs_var)
            
         output_fusion = Fusion_Branch_model(pool_global.data, pool_local.data)
