@@ -20,7 +20,7 @@ git clone https://github.com/sumanyumuku98/CovidAid_V2.git
 Create venv:
 ```
 conda env create -f env.yml
-conda activate covid
+conda activate covidaid
 ```
 ### Data Preparation
 Remove the `--combine_pneumonia` flag in below cases for 4-class classification.
