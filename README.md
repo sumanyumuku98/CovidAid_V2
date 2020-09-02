@@ -107,7 +107,7 @@ We obtained an accuracy of around `96.46%` on the public test set. The mean AURO
 
 </table>
 </center>
-
+<!---
 ## Visualizations
 To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for  our model’s  predictions  using  RISE and Attention Mechanism. We have generated these in order to reason whether the model predictions make sense from a radiologist's perspective. We recommend generating attention maps instead of RISE as most the time they are consistent with RISE and take much less time and computation resource hence can be used on CPU as well. Few visualizations have been shown below:
 <center>
@@ -160,5 +160,5 @@ To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for
 
 </center>
 
-
+--->
 
