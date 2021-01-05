@@ -1,4 +1,5 @@
 # CovidAID for Detection of SARS-CoV-2 from CXR using Attention Guided CNN.
+### Disclaimer: All algorithms have false positive and false negative results. The AI tool should not be used as a standalone test. The final right of diagnosis in a clinical setting should always lie with the physician.
 
 Chest Radiography (CXR) is among the most common investigations performed world-over and accounts for 25% of total diagnostic imaging procedures. It is a portable, inexpensive, and a safe modality, which is widely used to assess the extent of lung involvement in a wide variety of thoracic pathologies. It is widely available in hospital set-ups even in small peripheral centres and involves minimal contact with the patient. However, CXR has not been seen to be sensitive or specific for changes of COVID-19. While many patients do not show any changes on chest radiography (to an expert eye), those who do show changes are difficult to differentiate from other forms of pneumonia.
 
