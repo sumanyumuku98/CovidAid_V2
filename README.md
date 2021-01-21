@@ -110,6 +110,22 @@ We obtained an accuracy of around `96.46%` on the public test set. The mean AURO
 
 </table>
 </center>
+
+## Citation
+#### If you find our work useful, do cite it using the bibtex given below:
+```
+@article{Rangarajan_2021,
+	doi = {10.1007/s00330-020-07628-5},
+	url = {https://doi.org/10.1007%2Fs00330-020-07628-5},
+	year = 2021,
+	month = {jan},
+	publisher = {Springer Science and Business Media {LLC}},
+	author = {Krithika Rangarajan and Sumanyu Muku and Amit Kumar Garg and Pavan Gabra and Sujay Halkur Shankar and Neeraj Nischal and Kapil Dev Soni and Ashu Seith Bhalla and Anant Mohan and Pawan Tiwari and Sushma Bhatnagar and Raghav Bansal and Atin Kumar and Shivanand Gamanagati and Richa Aggarwal and Upendra Baitha and Ashutosh Biswas and Arvind Kumar and Pankaj Jorwal and  Shalimar and A. Shariff and Naveet Wig and Rajeshwari Subramanium and Anjan Trikha and Rajesh Malhotra and Randeep Guleria and Vinay Namboodiri and Subhashis Banerjee and Chetan Arora},
+	title = {Artificial Intelligence{\textendash}assisted chest X-ray assessment scheme for {COVID}-19},
+	journal = {European Radiology}
+}
+```
+
 <!---
 ## Visualizations
 To  demonstrate  the  results  qualitatively,  we  generate  saliency  maps  for  our model’s  predictions  using  RISE and Attention Mechanism. We have generated these in order to reason whether the model predictions make sense from a radiologist's perspective. We recommend generating attention maps instead of RISE as most the time they are consistent with RISE and take much less time and computation resource hence can be used on CPU as well. Few visualizations have been shown below:
